@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from django.views.generic import DetailView  # We only need DetailView for the CBV task
+from django.views.generic.detail import DetailView  # We only need DetailView for the CBV task
 from .models import Library
 from .models import Book
 
