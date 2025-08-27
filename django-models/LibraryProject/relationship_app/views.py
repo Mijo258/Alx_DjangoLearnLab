@@ -1,7 +1,8 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.generic import DetailView  # We only need DetailView for the CBV task
-from .models import Author, Book, Library, Librarian
+from .models import Library
+from .models import Book
 
 # --- 1. Correct Function-Based View ---
 def list_books(request):
