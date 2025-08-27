@@ -41,7 +41,7 @@ def query_samples():
     # The checker wants to see the reverse relationship being used.
     print("\nRetrieving librarian for City Library...")
     # We already have the library object from the previous query.
-    librarian = library.librarian
+    librarian = Librarian.objects.get(library=library_name)
     print(f"The librarian is {librarian.name}.")
 
 # This ensures the function runs when the script is executed.
