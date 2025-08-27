@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import list_books, LibraryDetailView
+from .views import list_books
 from . import views
 
 # This is a good practice for namespacing your URLs
