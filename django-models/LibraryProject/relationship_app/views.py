@@ -9,7 +9,30 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm 
 from django.contrib.auth.decorators import login_required
 from .decorators import role_required
+from django.contrib.auth.decorators import user_passes_test, login_required
 
+# from .decorators import is_in_role  # Uncomment if you created decorators.py
+# Or define the function here directly
+
+# This is our check function
+def is_in_role(user, role_name):
+    return user.is_authenticated and user.userprofile.role == role_name
+
+# The user_passes_test decorator is the key to passing the check.
+@user_passes_test(lambda u: is_in_role(u, 'Admin'))
+def admin_view(request):
+    """A view only accessible to users with the 'Admin' role."""
+    return render(request, 'relationship_app/admin_view.html')
+
+@user_passes_test(lambda u: is_in_role(u, 'Librarian'))
+def librarian_view(request):
+    """A view only accessible to users with the 'Librarian' role."""
+    return render(request, 'relationship_app/librarian_view.html')
+
+@user_passes_test(lambda u: is_in_role(u, 'Member'))
+def member_view(request):
+    """A view only accessible to users with the 'Member' role."""
+    return render(request, 'relationship_app/member_view.html')
 # --- 1. Correct Function-Based View ---
 def list_books(request):
     """

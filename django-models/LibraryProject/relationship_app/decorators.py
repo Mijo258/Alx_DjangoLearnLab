@@ -12,3 +12,11 @@ def role_required(role_name):
         # Otherwise, raise a permission denied exception or redirect
         raise PermissionDenied
     return user_passes_test(check_role)
+
+    # In relationship_app/decorators.py (or views.py)
+
+    def is_in_role(user, role_name):
+       """
+    Checks if a user is authenticated and belongs to a specific role.
+    """
+    return user.is_authenticated and user.userprofile.role == role_name
