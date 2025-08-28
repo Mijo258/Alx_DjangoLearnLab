@@ -6,7 +6,7 @@ from .models import Book
 from django.urls import reverse_lazy
 from .forms import CustomUserCreationForm # Import your new form
 from django.contrib.auth import login
-from django.contrib.auth import UserCreationForm 
+from django.contrib.auth.forms import UserCreationForm 
 
 # --- 1. Correct Function-Based View ---
 def list_books(request):
