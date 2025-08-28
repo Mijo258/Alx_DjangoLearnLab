@@ -25,4 +25,8 @@ urlpatterns = [
     # Logout URL (uses Django's built-in view)
     # We tell it which template to show after logging out.
     path('logout/', auth_views.LogoutView.as_view(template_name='relationship_app/logout.html'), name='logout'),
+
+    path('dashboard/admin/', views.admin_view, name='admin_view'),
+    path('dashboard/librarian/', views.librarian_view, name='librarian_view'),
+    path('dashboard/member/', views.member_view, name='member_view'),
 ]
