@@ -16,7 +16,7 @@ from django.contrib.auth.decorators import user_passes_test, login_required
 
 # This is our check function
 def is_in_role(user, role_name):
-    return user.is_authenticated and user.userprofile.role == role_name
+    return user.is_authenticated and hasattr(user, 'userprofile') and user.userprofile.role == role_name
 
 # The user_passes_test decorator is the key to passing the check.
 @user_passes_test(lambda u: is_in_role(u, 'Admin'))
