@@ -23,5 +23,6 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('app/', include('relationship_app.urls')), # Or whatever prefix you want
+    path('app/', include('relationship_app.urls')), 
+    path('accounts/', include('relationship_app.urls')),
 ]
