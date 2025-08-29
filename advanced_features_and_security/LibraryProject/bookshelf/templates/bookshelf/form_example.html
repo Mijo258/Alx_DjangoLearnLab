@@ -1,10 +1,15 @@
-<h1>Submit a Form</h1>
-<form method="post">
-    <!-- THIS LINE IS CRITICAL for security -->
-    {% csrf_token %}
-    
-    <!-- Your form fields go here -->
-    {{ form.as_p }}
-    
-    <button type="submit">Submit</button>
-</form>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Example Form</title>
+</head>
+<body>
+    <h1>Example Form</h1>
+    <form method="post">
+        <!-- Ensure the CSRF token is present -->
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
