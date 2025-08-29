@@ -6,6 +6,16 @@ class Book(models.Model):
 
     def __str__(self):
         return self.title
+    
+    class Meta:
+        """Defines metadata for the Book model, including custom permissions."""
+        permissions = (
+            # The format is ('codename', 'human-readable name')
+            ("can_view_book", "Can view book"),
+            ("can_create_book", "Can create a new book"),
+            ("can_edit_book", "Can edit an existing book"),
+            ("can_delete_book", "Can delete a book"),
+        )
 # Create your models here.
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 
