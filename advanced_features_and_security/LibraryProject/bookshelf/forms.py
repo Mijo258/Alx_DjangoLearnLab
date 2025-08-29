@@ -5,3 +5,8 @@ class BookForm(forms.ModelForm):
     class Meta:
         model = Book
         fields = ['title', 'author', 'publication_year']
+
+class ExampleForm(forms.Form):
+    """A simple example form to demonstrate CSRF protection."""
+    name = forms.CharField(max_length=100)
+    email = forms.EmailField()

@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import permission_required, login_required
 from .models import Book
+from .forms import ExampleForm
 from .forms import BookForm
 
 @login_required # Make sure the user is at least logged in
@@ -39,3 +40,11 @@ def book_delete_view(request, pk):
         book.delete()
         return redirect('book_list_view')
     return render(request, 'bookshelf/book_confirm_delete.html', {'book': book})
+
+
+def example_form_view(request):
+    """A view to display and handle the ExampleForm."""
+    form = ExampleForm()
+    # This view just displays the form, it doesn't need to handle POST data
+    # for this specific ALX task.
+    return render(request, 'bookshelf/form_example.html', {'form': form})
