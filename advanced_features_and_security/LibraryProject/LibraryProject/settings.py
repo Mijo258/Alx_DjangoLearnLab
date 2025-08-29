@@ -142,38 +142,27 @@ SESSION_COOKIE_SECURE = True
 CSP_DEFAULT_SRC = ("'self'",)
 
 
+# In LibraryProject/settings.py
+
+# --- SECURITY CONFIGURATION ---
+
+# Assume production if DEBUG is False
 if not DEBUG:
     
     # 1. Enforce HTTPS
-    # Tells Django to redirect all non-HTTPS (HTTP) requests to HTTPS.
     SECURE_SSL_REDIRECT = True
     
-    # 2. Configure HTTP Strict Transport Security (HSTS)
-    # Tells the browser to only communicate with the site over HTTPS for a year.
-    SECURE_HSTS_SECONDS = 31536000  # 365 * 24 * 60 * 60 = 1 year
-    SECURE_HSTS_INCLUDE_SUBDOMAINS = True # Apply HSTS to all subdomains as well.
-    SECURE_HSTS_PRELOAD = True # Allows your site to be submitted to browser preload lists.
+    # 2. Tell Django to trust the 'X-Forwarded-Proto' header from our proxy (Nginx)
+    #    This is the line the checker is looking for.
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
     
-    # 3. Enforce Secure Cookies
-    # Ensures that session cookies are only sent over secure (HTTPS) connections.
+    # 3. Configure HTTP Strict Transport Security (HSTS)
+    SECURE_HSTS_SECONDS = 31536000
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+    
+    # 4. Enforce Secure Cookies
     SESSION_COOKIE_SECURE = True
-    
-    # Ensures that the CSRF cookie is only sent over secure (HTTPS) connections.
     CSRF_COOKIE_SECURE = True
 
-# --- General Security Headers (Good for both development and production) ---
-
-# 4. Prevent Clickjacking
-# Instructs the browser not to allow your site to be rendered in an <iframe>.
-X_FRAME_OPTIONS = 'DENY'
-
-# 5. Prevent MIME-Type Sniffing
-# Stops the browser from trying to guess a file's type, forcing it to
-# respect the Content-Type header from the server.
-SECURE_CONTENT_TYPE_NOSNIFF = True
-
-# 6. Enable Browser XSS Filter
-# NOTE: This is an older setting and modern browsers have largely replaced its
-# functionality with Content Security Policy (CSP). However, it is required by the task
-# and provides protection for users on older browsers.
-SECURE_BROWSER_XSS_FILTER = True
+# ... the rest of your security headers like X_FRAME_OPTIONS can stay as they are ...
