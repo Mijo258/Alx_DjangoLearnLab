@@ -1,0 +1,10 @@
+<h1>Submit a Form</h1>
+<form method="post">
+    <!-- THIS LINE IS CRITICAL for security -->
+    {% csrf_token %}
+    
+    <!-- Your form fields go here -->
+    {{ form.as_p }}
+    
+    <button type="submit">Submit</button>
+</form>
